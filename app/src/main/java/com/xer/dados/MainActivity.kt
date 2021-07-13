@@ -8,27 +8,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val rangoRandom = 1..6
 
-        val numeroRandom = rangoRandom.random()
+        var primerDado = dado(6)
+        println("El dado de ${primerDado.cantidadCaras} caras devolvio el valor random de ${primerDado.lanzar()}" )
 
-        println("El numero random creado es : ${numeroRandom}")
-
-        var primerDado = dado()
-
-
-        println("La cantidasd de caras que teiene un dado es > ${primerDado.caras}")
-        primerDado.lanzar()
+        var segundoDado = dado(20)
+        println("Si el Dado tiene ${segundoDado.cantidadCaras} caras , entonces el numero random sera ${segundoDado.lanzar()}")
     }
 
 
 }
 
-class dado{
-    val caras = 6;
+class dado(val cantidadCaras: Int){
 
-    fun lanzar() {
-        var numeroRandom = (1..6).random()
-        println(numeroRandom)
+    fun lanzar(): Int  {
+        return (1..cantidadCaras).random()
     }
 }
