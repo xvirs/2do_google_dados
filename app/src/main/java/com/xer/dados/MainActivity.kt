@@ -1,8 +1,9 @@
-package com.xer.dados
+  package com.xer.dados
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        lanzar()
 
         val lanzarDado: Button = findViewById<Button>(R.id.button)
         lanzarDado.setOnClickListener() { lanzar() }
@@ -18,14 +20,28 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun lanzar() {
-        val dado = dado(6)
-        var numeroDado: TextView = findViewById<TextView>(R.id.textView)
-        numeroDado.text = dado.lanzar().toString()
+        val dado = Dado(6)
+        var resultado = dado.lanzar()
+        val imagenDado : ImageView = findViewById<ImageView>(R.id.imageView)
+
+
+
+        var resultadoDado = when(resultado){
+            1 -> R.drawable.cara1
+            2 -> R.drawable.cara2
+            3 -> R.drawable.cara3
+            4 -> R.drawable.cara4
+            5 -> R.drawable.cara5
+            else -> R.drawable.cara6
+        }
+        imagenDado.setImageResource(resultadoDado)
+
+        imagenDado.contentDescription = resultado.toString()
     }
 
 }
 
-class dado(val cantidadCaras: Int) {
+class Dado(val cantidadCaras: Int) {
     fun lanzar(): Int {
         return (1..cantidadCaras).random()
     }
